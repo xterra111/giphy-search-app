@@ -7,7 +7,7 @@ const nextConfig = {
 
 module.exports = {
 	devIndicators: {
-		autoPrerender: false,
+		autoPrerender: true,
 	},
-	//nextConfig,
+	nextConfig,
 };
