@@ -3,3 +3,12 @@ body{
     text-align: center;
     font-family: sans-serif;
 }
+
+.results-grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+img {
+    width: 100%;
+}

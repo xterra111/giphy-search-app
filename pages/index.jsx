@@ -18,6 +18,10 @@ export default function Home (initialData) {
 
 			</Head>
 			<h1>Giphy App</h1>
+
+
+			
+
 			<div className='results-grid'>
 			{initialData.trendingGifsFetched.data.map( ( item, index ) => {
 				return (
@@ -37,7 +41,7 @@ export default function Home (initialData) {
 }
 
 export async function getStaticProps() {
-	const trendingGifs = await fetch('https://api.giphy.com/v1/gifs/trending?api_key=XXX&limit=5')
+	const trendingGifs = await fetch('https://api.giphy.com/v1/gifs/trending?api_key=lefl9UYzNJB4kWJr130Z2baInXi43RjF&limit=5')
 	 const trendingGifsFetched = await trendingGifs.json();
 	
 	return {
