@@ -26,9 +26,11 @@ export default function Home (initialData) {
 			{initialData.trendingGifsFetched.data.map( ( item, index ) => {
 				return (
 					<div key={index}>
-						<h3>{item.title}</h3>
+						
 						<img src={item.images.original.url} />
 						{/* Need to research is image is better for NextJS */}
+
+						<h3>{item.title}</h3>
 					</div>
 
 				)
