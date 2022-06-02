@@ -1,6 +1,7 @@
 import Head from "next/head";
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Footer from "../components/Footer";
 
 
 
@@ -86,7 +87,7 @@ export default function Home ( initialData ) {
 			} )}
 				</div>
 		
-
+			<Footer />
 		</div>
 	)
 }

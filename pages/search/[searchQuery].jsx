@@ -1,10 +1,12 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
+
 import Link from "next/link";
+import Footer from "../../components/Footer";
 
 
-const searchQuery = (initialData) => {
-    const router = useRouter();
+const SearchQuery = (initialData) => {
+    const router = useRouter()
     return (
       
         <div>
@@ -30,11 +32,11 @@ const searchQuery = (initialData) => {
 				)
 			} )}
 				</div>
-
+            <Footer />
         </div>
     )
 };
-export default searchQuery;
+export default SearchQuery;
 
 export async function getServerSideProps ( context ) {
     
