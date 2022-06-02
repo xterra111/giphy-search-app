@@ -1,12 +1,44 @@
 import Head from "next/head";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 
 
-export default function Home (initialData) {
+export default function Home ( initialData ) {
+	
+	// usestate for form input change
+
+	const [searchInput, setSearchInput] = useState( {} );
+	const [searchResults, setSearchResults] = useState( [] );
+	const [searchQuery, setSearchQuery] = useState( "trending" );
+	
+	// useeffect for form input change
 	
 	useEffect( () => {
-		console.log( initialData );
-	});
+		setSearchResults (initialData.trendingGifsFetched.data)
+	}, [initialData]);
+
+	// handle change for form input
+	const handleChange = ( e ) => {
+		
+		let searchValue = e.target.value;
+		
+		setSearchInput( searchValue );
+		
+	};
+
+
+// prevent Default for form submit
+	const searchGifs = async ( e ) => {
+		e.preventDefault();
+		console.log(searchInput);
+		let searchedGif = await fetch( `https://api.giphy.com/v1/gifs/search?api_key=lefl9UYzNJB4kWJr130Z2baInXi43RjF&q=${searchInput}&limit=5&offset=0&rating=G&lang=en` );
+		const searchedGifResult = await searchedGif.json();
+		console.log(searchedGifResult);
+		setSearchResults( searchedGifResult.data );
+		setSearchQuery( searchInput );
+
+	};
+
+
 
 	return (
 		<div className='container'>
@@ -19,11 +51,15 @@ export default function Home (initialData) {
 			</Head>
 			<h1>Giphy App</h1>
 
+			<form onSubmit={searchGifs}>
+				<input onChange={handleChange} type="text" placeholder="Search for a gif" />
+				<button>Search</button>
+			</form>
 
-			
+			<h1>Search results for the term: {searchQuery}</h1>
 
 			<div className='results-grid'>
-			{initialData.trendingGifsFetched.data.map( ( item, index ) => {
+			{searchResults.map( ( item, index ) => {
 				return (
 					<div key={index}>
 						
@@ -42,13 +78,15 @@ export default function Home (initialData) {
 	)
 }
 
-export async function getStaticProps() {
-	const trendingGifs = await fetch('https://api.giphy.com/v1/gifs/trending?api_key=lefl9UYzNJB4kWJr130Z2baInXi43RjF&limit=5')
-	 const trendingGifsFetched = await trendingGifs.json();
+export async function getStaticProps () {
+	// limiting the number of results to 5
+	let trendingGifs = await fetch('https://api.giphy.com/v1/gifs/trending?api_key=lefl9UYzNJB4kWJr130Z2baInXi43RjF&limit=5')
+	  const trendingGifsFetched = await trendingGifs.json();
 	
 	return {
 		props: {
 			trendingGifsFetched: trendingGifsFetched
-		}
+		} 
+
 	}
 }
