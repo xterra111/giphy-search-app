@@ -1,5 +1,7 @@
 import Head from "next/head";
 import { useState, useEffect } from "react";
+import Link from "next/link";
+
 
 
 export default function Home ( initialData ) {
@@ -9,6 +11,7 @@ export default function Home ( initialData ) {
 	const [searchInput, setSearchInput] = useState( {} );
 	const [searchResults, setSearchResults] = useState( [] );
 	const [searchQuery, setSearchQuery] = useState( "trending" );
+	
 	
 	// useeffect for form input change
 	
@@ -58,6 +61,16 @@ export default function Home ( initialData ) {
 
 			<h1>Search results for the term: {searchQuery}</h1>
 
+			<p> Share this search  
+
+				<Link href={`/search/${searchQuery}`}>
+					<a> {searchQuery}</a>
+				</Link>
+
+
+
+			</p>
+
 			<div className='results-grid'>
 			{searchResults.map( ( item, index ) => {
 				return (
@@ -78,7 +91,7 @@ export default function Home ( initialData ) {
 	)
 }
 
-export async function getStaticProps () {
+export async function getServerSideProps () {
 	// limiting the number of results to 5
 	let trendingGifs = await fetch('https://api.giphy.com/v1/gifs/trending?api_key=lefl9UYzNJB4kWJr130Z2baInXi43RjF&limit=5')
 	  const trendingGifsFetched = await trendingGifs.json();
@@ -90,3 +103,17 @@ export async function getStaticProps () {
 
 	}
 }
+
+// Try StaticProps to see how it works. 
+// export async function getStaticProps () {
+// 	// limiting the number of results to 5
+// 	let trendingGifs = await fetch('https://api.giphy.com/v1/gifs/trending?api_key=lefl9UYzNJB4kWJr130Z2baInXi43RjF&limit=5')
+// 	  const trendingGifsFetched = await trendingGifs.json();
+	
+// 	return {
+// 		props: {
+// 			trendingGifsFetched: trendingGifsFetched
+// 		} 
+
+// 	}
+// }
