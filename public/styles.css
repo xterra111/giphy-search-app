@@ -7,8 +7,13 @@ body{
 .results-grid{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    margin-top: 20px;
+    grid-gap: 10px;
+    
 }
 
 img {
     width: 100%;
+    margin-right: 20px;
+    padding-right: 20px;
 }
