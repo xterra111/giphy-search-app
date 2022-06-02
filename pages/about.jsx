@@ -1,4 +1,5 @@
 import Head from "next/head"
+import Footer from "../components/Footer"
 
 export default function About () {
 
@@ -22,6 +23,8 @@ export default function About () {
 
             <p>Images are stronger than words. However, the fast-moving nature of GIFs make them stronger than images and their shorter length make them more digestible than video. That's the short answer.</p>
             <h1>About</h1>
+
+            <Footer />
         </div>
     )
 }
